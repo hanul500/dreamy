@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Side Navigation Bar</title>
+	<link rel="stylesheet" href="{% static 'styles.css'%}">
+	<script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+</head>
+<body>
+
+<div class="wrapper">
+  <!--
+    <div class="sidebar">
+        <div class="scale-up-center">
+       	<img src="{% static 'user3.png'%}" width=120px>
+       </div>
+       <div class="top">
+        <h2>{{user.username}}님</h2>
+        <h3>상쾌하고 좋은 아침입니다!</h3>
+        {% if user.is_authenticated %}
+        <h2>{{user.username}} Login!!</h2>
+        {%endif%}
+    </div>
+    	  <div class="middle">
+        <ul>
+            <li><a href="/home"><i class="fas fa-home"></i>Home</a></li>
+            <li><a href="/class"><i class="fas fa-tasks"></i>Class</a></li>
+            <li><a href="#"><i class="fas fa-address-card"></i>Tasks</a></li>
+            <li><a href="#"><i class="fas fa-school"></i>School</a></li>
+            <li><a href="#"><i class="fas fa-address-card"></i>Teacher</a></li>
+        </ul> 
+                
+        <div class="rotate-center">
+          <a href="#"><img src="{% static 'Logo3.png'%}" width=30px height=35px></a>
+      </div>
+      <h4>ONDREAMEDU</h4>
+  </div>
+
+    </div>
+    <div class="right-box">
+    
+    </div>
+  </div>
+-->
+{%block content%}
+
+      {%endblock%}
+</div>
+
+</body>
+</html>

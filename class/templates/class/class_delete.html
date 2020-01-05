@@ -1,0 +1,8 @@
+<h1>Are you sure you want to delete : </h1>
+    <p>{{ object.class_id }}</p>
+
+    <form method="POST">{% csrf_token %}
+
+        <button class="btn btn-danger" onclick="window.close()">Yes, delete</button>
+
+    </form>

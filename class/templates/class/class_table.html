@@ -1,0 +1,102 @@
+{% extends 'base/sidebar.html'%}
+{%block content%}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Class Table</title>
+  	<link rel="stylesheet" href="http://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="http://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+
+	<style>
+
+.button {
+	color: white;
+}
+	</style>
+
+</head>
+
+<body link="#000000">
+
+	<div class="container mb-5 mt-3">
+		<table class="table table-striped table-bordered mydatatable" style="width:100%">
+			<thead>
+				
+				<tr>
+					<th>코드</th>
+					<th>날짜</th>
+					<th>학교</th>
+					<th>구분</th>
+					<th>미니구분</th>
+					<th>수업</th>
+					<th>강사</th>
+					<th>인원</th>
+					<th>시간</th>
+					<th>장소</th>
+					<th>메모</th>
+					<th></th>
+				</tr>
+				<a href="create/" style="color: #fff" target="popup" onclick="window.open('create/', '수업추가', 'width=2000', 'height=700'); return false;"><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">추가</button></a>
+			</thead>
+			<tbody>
+				
+				{% for i in object_list %}
+				<tr>
+				
+					<td>{{i.class_id}}</td>
+      				<td>{{i.class_date}}</td>
+      				<td>{{i.class_schkey.sch_name}}</td>
+      				<td>{{i.class_cate}}</td>
+      				<td>{{i.class_minicate}}</td>
+      				<td>{{i.class_stat}}</td>
+      				<td>{{i.class_teakey.tea_name}}</td>
+			      	<td>{{i.class_stunum}}</td>
+			      	<td>{{i.class_time}}</td>
+			      	<td>{{i.class_place}}</td>
+			      	<td>{{i.memo}}</td>
+			      	<td><a href="{{i.class_id}}/" target="popup" onclick="window.open('{{i.class_id}}/', '진행상황', 'width=1000', 'height=700'); return false;">진행상황</a></td>
+			      	<td><a href="{{i.class_id}}/delete/" target="popup" onclick="window.open('{{i.class_id}}/delete/', '진행상황', 'width=1000', 'height=700'); return false;">삭제</a></td>
+
+
+				
+				</tr>
+				{%endfor%}
+			</tbody>
+			<tfoot>
+				<tr>
+					<th>수업코드</th>
+					<th>날짜</th>
+					<th>학교</th>
+					<th>구분</th>
+					<th>미니구분</th>
+					<th>수업</th>
+					<th>강사</th>
+					<th>인원</th>
+					<th>시간</th>
+					<th>장소</th>
+				</tr>
+
+			</tfoot>
+		</table>
+		{%block addbutton%}
+		{%endblock%}
+	</div>
+
+	<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+  	<script src="http://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  	<script src="stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+  	<script src="http://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+  	<script src="http://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+  	<script>
+  		$('.mydatatable').DataTable({
+  			order: [[3, 'desc']],
+  			paginType: 'full_numbers'
+  		});
+
+  	</script> 
+
+</body>
+</html>
+{%endblock%}

@@ -1,0 +1,17 @@
+{% load static %}
+<head>
+		<meta charset="utf-8">
+		<title>로그인 페이지</title>
+		<link rel="stylesheet" href="{% static 'logout.css' %}">
+	</head>
+	<body>
+	<h2>You Have Been Logged out</h2>
+
+	<div class="border-top pt-3">
+		<small class="text-muted">
+			Need Have An Account? <a class='ml-2' href="{% url 'login'%}">Log In Again</a>
+		</small>
+	</div>
+
+	<a href="/">홈으로</a>
+</body>

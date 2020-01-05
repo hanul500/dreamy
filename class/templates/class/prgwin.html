@@ -1,0 +1,206 @@
+{%load static%}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>수업 진행상황</title>
+  <link rel=stylesheet type="text/css" href="{%static 'prgwin.css'%}">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+</head>
+<body>
+    <div class="container">
+    <h1>진행상황</h1>
+    
+    <div class=rowdata>  
+        <table class=table1>
+        <tr>
+          <th>코드</th>
+          <th>날짜</th>
+          <th>학교</th>
+          <th>구분</th>
+          <th>미니구분</th>
+          <th>수업</th>
+          <th>강사</th>
+          <th>인원</th>
+          <th>시간</th>
+          <th>장소</th>
+        </tr>
+        <tr>
+          <td>C100001</td>
+              <td>12/30</td>
+              <td>까치울중학교</td>
+              <td>자유학기제</td>
+              <td>3D크리에이터반</td>
+              <td>에펠탑 조립하기</td>
+              <td>권서현</td>
+              <td>30</td>
+              <td>3~4교시</td>
+              <td>3-3</td>
+        </tr>
+          </table>
+    </div>
+    
+    <div class=progresstable>
+    <h3>Progress Table</h3>
+    <table class=table2>
+        <tr>
+          <th>진행</th>
+          <th>내용</th>
+          <th>기한</th>
+
+        </tr>
+        <tr>
+          <td>수업문의</td>
+              <td><input id="1" type="checkbox" class="new-control-input" value="15">전화 
+                        <input id="2" type="checkbox" class="new-control-input"  value="15">문자 
+                        <input id="3" type="checkbox" class="new-control-input"  value="15">메일</td>
+              <td>8/8</td>
+        </tr>
+                <tr>
+          <td>서류제출</td>
+              <td><input id="4" type="checkbox" class="new-control-input"  value="5">수업계획서
+                    <br><input id="5" type="checkbox" class="new-control-input"  value="5">견적서
+                    <br><input id="6" type="checkbox" class="new-control-input"  value="5">강사서류
+                    </td>
+              <td>8/8
+                    <br>8/9
+                    <br>8/10
+                    </td>
+        </tr>  
+                 <tr>
+          <td>재료주문</td>
+              <td>
+                        <button>불러오기</button>
+                        <button>재료리스트</button>
+                    <br><input id="7" type="checkbox" class="new-control-input"  value="5">가죽 1.0mm 29평
+                    <br><input id="8" type="checkbox" class="new-control-input"  value="5">가죽 끈 60개
+                    </td>
+              <td>
+                    <br>8/9
+                    <br>8/10
+                     </td>
+        </tr> 
+                <tr>
+          <td>도착확인</td>
+              <td><input id="9" type="checkbox" class="new-control-input"  value="5">가죽 1.0mm 29평
+                    <br><input id="10" type="checkbox" class="new-control-input"  value="5">가죽 끈 60개
+                    </td>
+              <td>8/9
+                    <br>8/10
+                     </td>
+        </tr> 
+                <tr>
+          <td>수업준비</td>
+              <td><input id="11" type="checkbox" class="new-control-input"  value="5">가죽 가공 작업</td>
+                    <td>8/20</td>
+        </tr> 
+                <tr>
+          <td>재료준비</td>
+              <td><input id="12" type="checkbox" class="new-control-input"  value="5">완료</td>
+                    <td>8/20</td>
+        </tr> 
+                <tr>
+          <td>강사수거</td>
+              <td><input id="13" type="checkbox" class="new-control-input"  value="5">완료</td>
+                    <td>8/20</td>
+        </tr> 
+                <tr>
+          <td>도구반납</td>
+              <td><input id="14" type="checkbox" class="new-control-input"  value="5">완료</td>
+                    <td>8/20</td>
+        </tr> 
+                <tr>
+          <td>정산</td>
+              <td><input id="15" type="checkbox" class="new-control-input"  value="5">견적서
+                    <br><input id="16" type="checkbox" class="new-control-input" value="20">계산서 
+                    <input id="17" type="checkbox" class="new-control-input"  value="20">현금영수증
+                    <input id="18" type="checkbox" class="new-control-input"  value="20">카드결제 
+                    <input id="19" type="checkbox" class="new-control-input"  value="20">현금
+                    <br><input id="20" type="checkbox" class="new-control-input"  value="5">입금확인
+                    </td>
+                    <td>8/20
+                    <br>8/22
+                    <br>8/24
+                    </td>
+        </tr> 
+          </table>    
+    
+ 
+  <div class="progress">
+    <div class="progress-bar bg-primary" role="progressbar" style="" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+  </div>
+  <p class="task-quantity"></p>
+</div>
+    
+        
+        
+    <div class=schinfo>
+    <h4>School Infomation</h4>
+        <table class=table3>
+        <tr>
+          <th>담당자</th>
+                    <td>권서현</td>
+               </tr>
+                <tr>
+          <th>전화번호</th>
+                    <td>010-3975-0741</td>
+               </tr>
+               <tr>
+          <th>이메일</th>
+                    <td>sss301504@hanmail.net</td>
+               </tr>
+                <tr>
+          <th>학교번호</th>
+                    <td>133-8182-792</td>
+               </tr>
+               <tr>
+          <th>학교번호</th>
+                    <td>133-8182-792</td>
+               </tr>
+               <tr>
+          <th>학교이메일</th>
+          <td>kkachi@korea.kr</td>
+               </tr>
+
+          </table>
+    </div>
+    
+ 
+        
+    <div class=memo>
+    <h5>Memo</h5>
+        <textarea row="10" cols="47" ></textarea>
+        <button class="button5">저장</button>
+    </div>
+    
+    <div class=log>
+    <h5>Log</h5>
+    </div>
+    
+<script>
+$('.progresstable').each(function(index, el) {
+  var chkLength = $(this).find('input[type="checkbox"]').length;
+  var max = 100;
+  var div = max / chkLength;
+  $('.scrumboard .progresstable .task-quantity').text('0/' + chkLength);
+  $(this).find('input[type="checkbox"]').attr('value', div);
+});
+
+$('.progresstable .new-control-input').on('change', function(event) {
+  var $checkbox = $(this);
+
+  $checkbox.closest('.progresstable').find(".progress .progress-bar").css("width", function() {
+    var width = $(this).data('width') || 0;
+    if ($checkbox.is(':checked')) {
+      width += parseInt($checkbox.val());
+    } else {
+      width -= parseInt($checkbox.val());
+    }
+    $(this).data('width', width);
+    return width + "%";
+  });
+});
+</script>
+
+
+</body>
+</html>
