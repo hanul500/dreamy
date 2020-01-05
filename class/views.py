@@ -61,7 +61,7 @@ def class_detail_view(request, class_id):
 	# 1 object -> detail view
 	obj = get_object_or_404(Classinfo, class_id=class_id)
 	template_name = 'class/prgwin.html'
-	context = {"object": obj}
+	context = {"class_obj": obj, "sch_obj": obj.class_schkey, "sch_obj": obj.class_schkey,}
 	return render(request, template_name, context)
 
 
