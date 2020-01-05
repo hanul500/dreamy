@@ -35,7 +35,7 @@ def class_create_view(request):
 		obj.class_statkey=Classstatinfo.objects.all().filter(class_title=obj.class_stat)[0]
 		stat_mat_filtered = stat_mat_obj.filter(stat_mat=obj.class_statkey)
 		stat_tool_filtered = stat_tool_obj.filter(stat_tool=obj.class_statkey)
-		obj.class_id = "C"+'%06d'%len(Classinfo.objects.all())
+		obj.class_id = "C"+ "%06d"%(int(Classinfo.objects.all()[len(Classinfo.objects.all())-1].class_id[1:])+1)
 		obj.save()
 		for i in range(len(stat_mat_filtered)):
 			dyna_mat_obj = dyna_mat_rel()
