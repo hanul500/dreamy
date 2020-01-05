@@ -31,6 +31,7 @@ urlpatterns = [
     path('class/', include('class.urls')),
     path('school/', include('school.urls')),
     path('material/', include('material.urls')),
+    path('classstat/', include('classstatd.urls')),
 
 
 ]
