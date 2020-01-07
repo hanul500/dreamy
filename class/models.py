@@ -53,12 +53,21 @@ class Classinfo(models.Model):
 	class_tea = models.CharField(null=True, blank=True,max_length=120)
 	class_teakey = models.ForeignKey(Teacherinfo, on_delete=models.CASCADE, null=True,blank=True)
 	memo = models.CharField(null=True, blank=True,max_length=120)
-	updated = models.DateTimeField(auto_now=True, null=True)
+
+	updated = models.DateTimeField(auto_now=True)
+	timestamp = models.DateTimeField(auto_now_add=True)
+
 	class_ready = models.BooleanField(default=False)
 	class_taken = models.BooleanField(default=False)
 	class_done = models.BooleanField(default=False)
-	#timestamp = models.DateTimeField(auto_now_add=True)
-	
+	class_doc_plan = models.BooleanField(default=False)
+	class_doc_preestim = models.BooleanField(default=False)
+	class_doc_tea = models.BooleanField(default=False)
+	class_doc_finestim = models.BooleanField(default=False)
+	class_cal_meth = models.CharField(null=True, blank=True,max_length=120)
+	class_deposit_check = models.BooleanField(default=False)
+
+
 	objects = ClassManager()
 
 

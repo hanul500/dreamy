@@ -25,6 +25,15 @@ class ClassForm(forms.Form):
 	class_time = forms.CharField()
 	class_place = forms.CharField()
 	memo = forms.CharField()
+	class_ready = forms.BooleanField()
+	class_taken = forms.BooleanField()
+	class_done = forms.BooleanField()
+	class_doc_plan = forms.BooleanField()
+	class_doc_preestim = forms.BooleanField()
+	class_doc_tea = forms.BooleanField()
+	class_doc_finestim = forms.BooleanField()
+	class_cal_meth = forms.CharField()
+	class_deposit_check = forms.BooleanField()
 
 
 
@@ -46,3 +55,10 @@ class ClassModelForm(forms.ModelForm):
 		if qs.exists():  #중복 방지
 			raise forms.ValidationError("This title has already been used.")
 		return class_time
+
+
+
+class ClassTableCheckForm(forms.ModelForm):
+	class Meta:
+		model = Classinfo
+		fields = ['class_ready','class_taken','class_done','class_doc_plan','class_doc_preestim','class_doc_tea','class_doc_finestim','class_cal_meth','class_deposit_check']

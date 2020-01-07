@@ -58,10 +58,14 @@ def class_create_view(request):
 	return render(request, template_name, context)
 
 def class_detail_view(request, class_id):
-	# 1 object -> detail view
 	obj = get_object_or_404(Classinfo, class_id=class_id)
+	form = ClassTableCheckForm(request.POST or None, instance=obj)
+	if form.is_valid():
+		form.save()
+
+	
 	template_name = 'class/prgwin.html'
-	context = {"class_obj": obj, "sch_obj": obj.class_schkey, "sch_obj": obj.class_schkey,}
+	context = {"class_obj": obj, "sch_obj": obj.class_schkey, "classstat_obj": obj.class_statkey, "mat_obj":dyna_mat_rel.objects.all().filter(dyna_mat=obj),"tool_obj":dyna_tool_rel.objects.all().filter(dyna_tool=obj)}
 	return render(request, template_name, context)
 
 

@@ -25,20 +25,22 @@
           <th>장소</th>
         </tr>
         <tr>
-          <td>C100001</td>
-              <td>12/30</td>
-              <td>까치울중학교</td>
-              <td>자유학기제</td>
-              <td>3D크리에이터반</td>
-              <td>에펠탑 조립하기</td>
-              <td>권서현</td>
-              <td>30</td>
-              <td>3~4교시</td>
-              <td>3-3</td>
+          <td>{{class_obj.class_id}}</td>
+              <td>{{class_obj.class_date}}</td>
+              <td>{{sch_obj.sch_name}}</td>
+              <td>{{class_obj.class_cate}}</td>
+              <td>{{classstat_obj.class_minicate}}</td>
+              <td>{{classstat_obj.class_title}}</td>
+              <td>{{class_obj.class_teakey.tea_name}}</td>
+              <td>{{class_obj.class_stunum}}</td>
+              <td>{{class_obj.class_time}}</td>
+              <td>{{class_obj.class_place}}</td>
         </tr>
           </table>
     </div>
-    
+
+
+    <form class="addclass"  method="POST" action=".">{% csrf_token %}
     <div class=progresstable>
     <h3>Progress Table</h3>
     <table class=table2>
@@ -50,16 +52,16 @@
         </tr>
         <tr>
           <td>수업문의</td>
-              <td><input id="1" type="checkbox" class="new-control-input" value="15">전화 
-                        <input id="2" type="checkbox" class="new-control-input"  value="15">문자 
-                        <input id="3" type="checkbox" class="new-control-input"  value="15">메일</td>
+              <td>  <input id="1" type="checkbox" class="new-control-input" value="15">전화 
+                    <input id="2" type="checkbox" class="new-control-input"  value="15">문자 
+                    <input id="3" type="checkbox" class="new-control-input"  value="15">메일</td>
               <td>8/8</td>
         </tr>
                 <tr>
           <td>서류제출</td>
-              <td><input id="4" type="checkbox" class="new-control-input"  value="5">수업계획서
-                    <br><input id="5" type="checkbox" class="new-control-input"  value="5">견적서
-                    <br><input id="6" type="checkbox" class="new-control-input"  value="5">강사서류
+              <td><input id="4" name="class_doc_plan" type="checkbox" class="new-control-input" {%if class_obj.class_doc_plan %} checked="checked" {%endif%} value="5">수업계획서
+                    <br><input id="5" name="class_doc_preestim" type="checkbox" class="new-control-input" {%if class_obj.class_doc_preestim %} checked="checked" {%endif%} value="5">견적서
+                    <br><input id="6" name="class_doc_tea" type="checkbox" class="new-control-input" {%if class_obj.class_doc_tea %} checked="checked" {%endif%} value="5">강사서류
                     </td>
               <td>8/8
                     <br>8/9
@@ -94,13 +96,13 @@
                     <td>8/20</td>
         </tr> 
                 <tr>
-          <td>재료준비</td>
-              <td><input id="12" type="checkbox" class="new-control-input"  value="5">완료</td>
+          <td><label for="id_class_ready"> 재료준비</label></td>
+              <td><input name="class_ready" id="12" type="checkbox" class="new-control-input" {%if class_obj.class_ready %} checked="checked" {%endif%} id="id_class_ready" value="5">완료</td>
                     <td>8/20</td>
         </tr> 
                 <tr>
-          <td>강사수거</td>
-              <td><input id="13" type="checkbox" class="new-control-input"  value="5">완료</td>
+          <td><label for="id_class_taken"> 강사수거</label></td>
+              <td><input id="13" name="class_taken" type="checkbox" class="new-control-input" {%if class_obj.class_taken %} checked="checked" {%endif%} value="5">완료</td>
                     <td>8/20</td>
         </tr> 
                 <tr>
@@ -123,6 +125,7 @@
                     </td>
         </tr> 
           </table>    
+          <button type="submit">저장</button>
     
  
   <div class="progress">
@@ -130,6 +133,7 @@
   </div>
   <p class="task-quantity"></p>
 </div>
+</form>
     
         
         
