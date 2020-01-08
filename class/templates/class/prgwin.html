@@ -77,7 +77,7 @@
                     <br><input id="8" type="checkbox" class="new-control-input"  value="5">가죽 끈 60개
                     </td>
               <td>
-                    <br>8/9
+                    <br>8/8
                     <br>8/10
                      </td>
         </tr> 
@@ -133,49 +133,46 @@
   </div>
   <p class="task-quantity"></p>
 </div>
-</form>
-    
-        
-        
+
+
     <div class=schinfo>
     <h4>School Infomation</h4>
         <table class=table3>
         <tr>
           <th>담당자</th>
-                    <td>권서현</td>
+                    <td>{{schtea_obj.schtea_name}}</td>
                </tr>
                 <tr>
           <th>전화번호</th>
-                    <td>010-3975-0741</td>
+                    <td>{{schtea_obj.schtea_tel1}}</td>
                </tr>
                <tr>
           <th>이메일</th>
-                    <td>sss301504@hanmail.net</td>
+                    <td>{{schtea_obj.schtea_email}}</td>
                </tr>
                 <tr>
-          <th>학교번호</th>
-                    <td>133-8182-792</td>
+          <th>학교코드</th>
+                    <td>{{sch_obj.sch_code}}</td>
                </tr>
                <tr>
-          <th>학교번호</th>
-                    <td>133-8182-792</td>
+          <th>학교전화번호</th>
+                    <td>{{sch_obj.sch_tel}}</td>
                </tr>
                <tr>
           <th>학교이메일</th>
-          <td>kkachi@korea.kr</td>
+          <td>{{sch_obj.sch_email}}</td>
                </tr>
 
           </table>
     </div>
-    
- 
-        
+
+
     <div class=memo>
-    <h5>Memo</h5>
-        <textarea row="10" cols="47" ></textarea>
-        <button class="button5">저장</button>
+    <h5><label="id_memo"> Memo</label="id_memo"></h5>
+        <textarea id="id_memo" name="memo" row="10" cols="47" >{{class_obj.memo}}</textarea>
+        <button type='submit' class="button5">저장</button>
     </div>
-    
+</form>
     <div class=log>
     <h5>Log</h5>
     </div>

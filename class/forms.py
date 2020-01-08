@@ -61,4 +61,4 @@ class ClassModelForm(forms.ModelForm):
 class ClassTableCheckForm(forms.ModelForm):
 	class Meta:
 		model = Classinfo
-		fields = ['class_ready','class_taken','class_done','class_doc_plan','class_doc_preestim','class_doc_tea','class_doc_finestim','class_cal_meth','class_deposit_check']
+		fields = ['memo', 'class_ready','class_taken','class_done','class_doc_plan','class_doc_preestim','class_doc_tea','class_doc_finestim','class_cal_meth','class_deposit_check']

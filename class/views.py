@@ -65,7 +65,7 @@ def class_detail_view(request, class_id):
 
 	
 	template_name = 'class/prgwin.html'
-	context = {"class_obj": obj, "sch_obj": obj.class_schkey, "classstat_obj": obj.class_statkey, "mat_obj":dyna_mat_rel.objects.all().filter(dyna_mat=obj),"tool_obj":dyna_tool_rel.objects.all().filter(dyna_tool=obj)}
+	context = {"class_obj": obj, "sch_obj": obj.class_schkey, "classstat_obj": obj.class_statkey, "mat_obj":dyna_mat_rel.objects.all().filter(dyna_mat=obj),"tool_obj":dyna_tool_rel.objects.all().filter(dyna_tool=obj),"schtea_obj":Schoolteainfo.objects.all().filter(schtea_schkey=obj.class_schkey)[0]}
 	return render(request, template_name, context)
 
 
