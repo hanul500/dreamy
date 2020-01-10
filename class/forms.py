@@ -1,5 +1,5 @@
 from django import forms
-from .models import Classinfo
+from .models import *
 from school.models import Schoolinfo
 from teacher.models import Teacherinfo
 from classstatd.models import *
@@ -25,6 +25,23 @@ class ClassForm(forms.Form):
 	class_time = forms.CharField()
 	class_place = forms.CharField()
 	memo = forms.CharField()
+	class_ready = forms.BooleanField()
+	class_taken = forms.BooleanField()
+	class_done = forms.BooleanField()
+	class_doc_plan = forms.BooleanField()
+	class_doc_preestim = forms.BooleanField()
+	class_doc_tea = forms.BooleanField()
+	class_doc_finestim = forms.BooleanField()
+	class_cal_meth = forms.CharField()
+	class_deposit_check = forms.BooleanField()
+
+
+class dyna_mat_relForm(forms.Form):
+	dyna_mat_num = forms.CharField()
+	mat_order_done = forms.BooleanField()
+	mat_deliver_done = forms.BooleanField()
+	mat_manu_done = forms.BooleanField()
+	mat_div_done = forms.BooleanField()
 
 
 
@@ -46,3 +63,17 @@ class ClassModelForm(forms.ModelForm):
 		if qs.exists():  #중복 방지
 			raise forms.ValidationError("This title has already been used.")
 		return class_time
+
+
+
+class ClassTableCheckForm(forms.ModelForm):
+	class Meta:
+		model = Classinfo
+		fields = ['memo', 'class_ready','class_taken','class_done','class_re_done','class_cont_call','class_cont_email','class_cont_message', 'class_doc_plan',
+		'class_doc_preestim','class_doc_tea','class_doc_finestim','class_cal_meth',
+		'class_deposit_check']
+
+class dynamatTableCheckForm(forms.ModelForm):
+	class Meta:
+		model = dyna_mat_rel
+		fields = ['mat_deliver_done', 'mat_order_done','mat_manu_done','mat_div_done','dyna_mat_num']

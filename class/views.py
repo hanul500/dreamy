@@ -11,12 +11,13 @@ from teacher.models import *
 
 # Create your views here.
 
-
+@login_required
 def class_home(request):
 	qs = Classinfo.objects.all()
 	context = {'title':'class information','object_list': qs}
 	return render(request, 'class/class_table.html', context)
 
+@login_required
 def class_create_view(request):
 	form = ClassModelForm(request.POST or None, request.FILES or None)
 	sch_obj=Schoolinfo.objects.all()
@@ -57,34 +58,62 @@ def class_create_view(request):
 	context = {'form': form, 'sch_obj':sch_obj, 'classstat_obj':classstat_obj, 'tea_obj':tea_obj}
 	return render(request, template_name, context)
 
+@login_required
 def class_detail_view(request, class_id):
-	# 1 object -> detail view
 	obj = get_object_or_404(Classinfo, class_id=class_id)
+	mat_obj = list(dyna_mat_rel.objects.all().filter(dyna_mat=obj))
+	tool_obj = list(dyna_tool_rel.objects.all().filter(dyna_tool=obj))
+	form_class = ClassTableCheckForm(request.POST or None, instance=obj)
+	if form_class.is_valid():
+		for i in range(len(dyna_mat_rel.objects.all().filter(dyna_mat=obj))):
+			
+			if request.POST.get('mat_deliver_done%d'%(i+1))==None:
+				mat_obj[i].mat_deliver_done = False
+			else:
+				mat_obj[i].mat_deliver_done = True
+			if request.POST.get('mat_order_done%d'%(i+1))==None:
+				mat_obj[i].mat_order_done = False
+			else:
+				mat_obj[i].mat_order_done = True
+			mat_obj[i].dyna_mat_num=request.POST.get('dyna_mat_num%d'%(i+1))
+
+			mat_obj[i].save()
+			print(request.POST.get(request.POST.get('dyna_mat_num%d'%(i+1))))
+			#print(mat_obj[i].mat_deliver_done)
+
+		form_class.save()
+			
+			
+			#for j in range(len(dyna_mat_rel.objects.all().filter(dyna_mat=obj))):
+			#	form_mat[j].save()
+
 	template_name = 'class/prgwin.html'
-	context = {"class_obj": obj, "sch_obj": obj.class_schkey, "sch_obj": obj.class_schkey,}
+	context = {"class_obj": obj, "sch_obj": obj.class_schkey, "classstat_obj": obj.class_statkey, "mat_obj":dyna_mat_rel.objects.all().filter(dyna_mat=obj),"tool_obj":tool_obj}#"schtea_obj":Schoolteainfo.objects.all().filter(schtea_schkey=obj.class_schkey)[0]}
+	#print(dyna_mat_rel.objects.all().filter(dyna_mat=obj)[0].mat_dyna.mat_name)
 	return render(request, template_name, context)
 
-
+@login_required
 def class_update_view(request, class_id):
 	# 1 object -> detail view
 	obj = get_object_or_404(Classinfo, class_id=class_id)
 	form = ClassModelForm(request.POST or None, instance=obj)
 	if form.is_valid():
 		form.save()
-	template_name = 'class/class_form.html'
+	template_name = 'class/class_update.html'
 	context = {'form': form}
 	return render(request, template_name, context)
 
-
+@login_required
 def class_delete_view(request,class_id):
 	obj = get_object_or_404(Classinfo, class_id=class_id)
 	template_name = 'class/class_delete.html'
 	if request.method == "POST":
 		obj.delete()
-		return redirect("/class")
+		
 	context = {"object": obj}
 	return render(request, template_name, context)
 
+@login_required
 def class_sch_queryinput(request):
 	class_obj = Classinfo.objects.all()
 	sch_obj = Schoolinfo.objects.all()

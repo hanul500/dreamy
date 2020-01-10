@@ -6,7 +6,6 @@ class Classstatinfo(models.Model):
 	def __str__(self):
 		return self.class_title
 	class_code = models.CharField(max_length=120)
-	recipe_cate = models.CharField(max_length=120)
 	class_title = models.CharField(null=False, blank=True ,max_length=120)
 	class_minicate = models.CharField(null=True, blank=True,max_length=120)
 	class_detail = models.TextField(null=True, blank=True)

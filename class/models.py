@@ -7,7 +7,7 @@ from teacher.models import Teacherinfo
 from classstatd.models import Classstatinfo
 from material.models import *
 # Create your models here.
-
+User = settings.AUTH_USER_MODEL
 
 class ClassQuerySet(models.QuerySet):
 	def published(self):
@@ -39,6 +39,7 @@ class ClassManager(models.Manager):
 class Classinfo(models.Model):
 	def __str__(self):
 		return str(self.class_id)+'  '+str(self.class_sch)+'  '+str(self.class_stat)
+	user = models.ForeignKey(User, default=1, null=True,  on_delete=models.SET_NULL)
 	class_id = models.CharField(null=True, blank=True, max_length=120)
 	class_date = models.DateField(auto_now=False, blank=True, auto_now_add=False, null=True, )
 	class_cate = models.CharField(null=True, blank=True,max_length=120)
@@ -53,12 +54,26 @@ class Classinfo(models.Model):
 	class_tea = models.CharField(null=True, blank=True,max_length=120)
 	class_teakey = models.ForeignKey(Teacherinfo, on_delete=models.CASCADE, null=True,blank=True)
 	memo = models.CharField(null=True, blank=True,max_length=120)
-	updated = models.DateTimeField(auto_now=True, null=True)
+
+	updated = models.DateTimeField(auto_now=True)
+	timestamp = models.DateTimeField(auto_now_add=True)
+
+	class_cont_call = models.BooleanField(default=False)
+	class_cont_email = models.BooleanField(default=False)
+	class_cont_message = models.BooleanField(default=False)
+
 	class_ready = models.BooleanField(default=False)
 	class_taken = models.BooleanField(default=False)
 	class_done = models.BooleanField(default=False)
-	#timestamp = models.DateTimeField(auto_now_add=True)
+	class_re_done = models.BooleanField(default=False)
+	class_doc_plan = models.BooleanField(default=False)
+	class_doc_preestim = models.BooleanField(default=False)
+	class_doc_tea = models.BooleanField(default=False)
+	class_doc_finestim = models.BooleanField(default=False)
+	class_cal_meth = models.CharField(null=True, blank=True,max_length=120)
+	class_deposit_check = models.BooleanField(default=False)
 	
+
 	objects = ClassManager()
 
 
@@ -66,7 +81,7 @@ class dyna_mat_rel(models.Model):
 	def __str__(self):
 		return str(self.dyna_mat.class_id) + "----" + str(self.dyna_mat.class_statkey.class_title) + "----" + str(self.mat_dyna.mat_name)
 	dyna_mat = models.ForeignKey(Classinfo, on_delete=models.CASCADE, null=True, blank=True)
-	dyna_mat_num = models.CharField(null=True, blank = True, max_length = 120)
+	dyna_mat_num = models.CharField(null=True, blank = True, max_length = 120, default="수량을 입력해주세요")
 	mat_dyna = models.ForeignKey(Materialinfo, on_delete=models.CASCADE, null=True, blank=True)
 	mat_order_done = models.BooleanField(default=False)
 	mat_deliver_done = models.BooleanField(default=False)
