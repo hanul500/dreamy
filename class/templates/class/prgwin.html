@@ -35,6 +35,7 @@
               <td>{{class_obj.class_stunum}}</td>
               <td>{{class_obj.class_time}}</td>
               <td>{{class_obj.class_place}}</td>
+              <td><a href="update/"><button>수업정보수정</button></a></td>
         </tr>
           </table>
     </div>
@@ -52,9 +53,9 @@
         </tr>
         <tr>
           <td>수업문의</td>
-              <td>  <input id="1" type="checkbox" class="new-control-input" value="15">전화 
-                    <input id="2" type="checkbox" class="new-control-input"  value="15">문자 
-                    <input id="3" type="checkbox" class="new-control-input"  value="15">메일</td>
+              <td>  <input id="4" name="class_cont_call" type="checkbox" class="new-control-input" {%if class_obj.class_cont_call %} checked="checked" {%endif%} value="5">전화 
+                    <input id="4" name="class_cont_message" type="checkbox" class="new-control-input" {%if class_obj.class_cont_message %} checked="checked" {%endif%} value="5">문자 
+                    <input id="4" name="class_cont_email" type="checkbox" class="new-control-input" {%if class_obj.class_cont_email %} checked="checked" {%endif%} value="5">메일</td>
               <td>8/8</td>
         </tr>
                 <tr>
@@ -70,12 +71,9 @@
         </tr>  
                  <tr>
           <td>재료주문</td>
-              <td>
-                        <button>불러오기</button>
-                        <button>재료리스트</button>
-                    <br><input id="7" type="checkbox" class="new-control-input"  value="5">가죽 1.0mm 29평
-                    <br><input id="8" type="checkbox" class="new-control-input"  value="5">가죽 끈 60개
-                    </td>
+              <td>{%for i in mat_obj%}
+                        <input id="10" value="5" name="mat_order_done{{forloop.counter}}" id="id_mat_order_done{{forloop.counter}}" type="checkbox" class="new-control-input" {%if i.mat_order_done %} checked="checked" {%endif%} >{{i.mat_dyna}}    <input name="dyna_mat_num{{forloop.counter}}" value="{{i.dyna_mat_num}}" type="text"><br>
+                    {%endfor%}</td>
               <td>
                     <br>8/8
                     <br>8/10
@@ -83,9 +81,12 @@
         </tr> 
                 <tr>
           <td>도착확인</td>
-              <td><input id="9" type="checkbox" class="new-control-input"  value="5">가죽 1.0mm 29평
-                    <br><input id="10" type="checkbox" class="new-control-input"  value="5">가죽 끈 60개
-                    </td>
+          <td>{%for i in mat_obj%}
+
+              
+              <input id="10" value="5" name="mat_deliver_done{{forloop.counter}}" id="id_mat_deliver_done{{forloop.counter}}" type="checkbox" class="new-control-input" {%if i.mat_deliver_done %} checked="checked" {%endif%} ><label for="id_mat_deliver_done{{forloop.counter}}">{{i.mat_dyna}}</label><br>
+              
+          {%endfor%}</td>
               <td>8/9
                     <br>8/10
                      </td>
@@ -107,17 +108,18 @@
         </tr> 
                 <tr>
           <td>도구반납</td>
-              <td><input id="14" type="checkbox" class="new-control-input"  value="5">완료</td>
+              <td><input id="14" name="class_re_done" type="checkbox"  class="new-control-input" {%if class_obj.class_re_done %} checked="checked" {%endif%} value="5">완료</td>
                     <td>8/20</td>
         </tr> 
                 <tr>
           <td>정산</td>
-              <td><input id="15" type="checkbox" class="new-control-input"  value="5">견적서
-                    <br><input id="16" type="checkbox" class="new-control-input" value="20">계산서 
-                    <input id="17" type="checkbox" class="new-control-input"  value="20">현금영수증
-                    <input id="18" type="checkbox" class="new-control-input"  value="20">카드결제 
-                    <input id="19" type="checkbox" class="new-control-input"  value="20">현금
-                    <br><input id="20" type="checkbox" class="new-control-input"  value="5">입금확인
+              <td><input id="15" name="class_doc_finestim" type="checkbox" class="new-control-input" {%if class_obj.class_doc_finestim %} checked="checked" {%endif%} value="5">견적서
+                    <br>
+                    <input id="16" name="class_cal_meth" type="radio" {%if class_obj.class_cal_meth == "계산서" %} checked="checked" {%endif%} class="new-control-input" value="계산서">계산서 
+                    <input id="17" name="class_cal_meth" type="radio" {%if class_obj.class_cal_meth == "현금영수증" %} checked="checked" {%endif%} class="new-control-input"  value="현금영수증">현금영수증
+                    <input id="18" name="class_cal_meth" type="radio" {%if class_obj.class_cal_meth == "카드결제" %} checked="checked" {%endif%} class="new-control-input"  value="카드결제">카드결제 
+                    <input id="19" name="class_cal_meth" type="radio" {%if class_obj.class_cal_meth == "현금" %} checked="checked" {%endif%} class="new-control-input"  value="현금">현금
+                    <br><input id="20" name="class_deposit_check" type="checkbox" class="new-control-input" {%if class_obj.class_deposit_check %} checked="checked" {%endif%} value="5">입금확인
                     </td>
                     <td>8/20
                     <br>8/22
