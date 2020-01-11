@@ -72,6 +72,8 @@ class Classinfo(models.Model):
 	class_doc_finestim = models.BooleanField(default=False)
 	class_cal_meth = models.CharField(null=True, blank=True,max_length=120)
 	class_deposit_check = models.BooleanField(default=False)
+
+	class_process = models.CharField(null=True, blank=True, default="진행X", max_length=120)
 	
 
 	objects = ClassManager()

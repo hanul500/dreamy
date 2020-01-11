@@ -20,16 +20,20 @@
 	<form class="addclass"  method="POST" action=".">{% csrf_token %}
 		  	<div class="date">
             <label for='id_class_date'>날짜</label>
-		  	<input name='class_date' type="date" class="dateadd" placeholder="날짜를 선택하세요" id='id_class_date'>
+		  	<input name='class_date' type="date" class="dateadd" value="{{obj.class_date|date:"Y-m-d"}}" id='id_class_date'>
             </div>
 	  	<br>
             <div class="searchlist">
 	        <div>
-	          <label for='id_class_sch'>학교</label>
+	          <label for='id_class_sch'>학교</label> 
 	          <select name='class_sch' data-placeholder="학교를 검색하세요..." class="chosen-select" tabindex="2" id='id_class_sch'>
-	            <option value=""></option>
+	            
 	            {%for i in sch_obj%}
+	            {%if i.sch_name == obj.class_sch%}
+	            <option value="{{obj.class_sch}}" selected>{{obj.class_sch}}</option>
+	            {%else%}
 	            <option value="{{i}}">{{i}}</option>
+	            {%endif%}
 	            {%endfor%}
 	          </select>
 	        </div>
@@ -40,7 +44,7 @@
 	          <label for='id_class_cate'>구분</label>
 	          
 	          <select name='class_cate' data-placeholder="구분을 검색하세요..." class="chosen-select" tabindex="2" id='id_class_cate'>
-	            <option value=""></option>
+	            <option value="{{obj.class_cate}}" selected>{{obj.class_cate}}</option>
 	            <option value="자유학기">자유학기</option>
 	            <option value="동아리">동아리</option>
 	            <option value="기타">기타</option>
@@ -54,10 +58,14 @@
 	        <div>
 	          <label for='id_class_stat'>수업</label>
 	          <select name='class_stat' data-placeholder="수업을 검색하세요..." class="chosen-select" tabindex="2" id='id_class_stat'>
-	            <option value=""></option>
+	            
 	            
 	            {%for i in classstat_obj%}
+	            {%if i.classstat_title == obj.class_stat%}
+	            <option value="{{obj.class_stat}}" selected>{{obj.class_stat}}</option>
+	            {%else%}
 	            <option value="{{i}}">{{i}}</option>
+	            {%endif%}
 	            {%endfor%}
 	          </select>
 	        </div>
@@ -68,11 +76,12 @@
 	          <label for='id_class_tea'>강사</label>
 	          <select name='class_tea' data-placeholder="강사를 검색하세요..." class="chosen-select" tabindex="2" id='id_class_tea'>
 	            <option value=""></option>
-
-	            {%for i in tea_obj%}
-
+				{%for i in tea_obj%}
+	            {%if i.tea_name == obj.class_tea%}
+	            <option value="{{obj.class_tea}}" selected>{{obj.class_tea}}</option>
+	            {%else%}
 	            <option value="{{i}}">{{i}}</option>
-
+	            {%endif%}
 	            {%endfor%}
 	          </select>
 	        </div>
@@ -80,27 +89,27 @@
   		<br>
   		<div class="number">
   			<label for='id_class_count'>총 회차</label>
-		  	<input name='class_count' type="number" class="numberinput" placeholder="인원을 입력하세요..." id='id_class_count'>
+		  	<input name='class_count' type="number" class="numberinput" value="{{obj.class_count}}" placeholder="인원을 입력하세요..." id='id_class_count'>
             </div>
 		<br>
             <div class="number">
   			<label for='id_class_stunum'>인원</label>
-		  	<input name='class_stunum' type="text" class="numberinput" placeholder="인원을 입력하세요..." id='id_class_stunum'>
+		  	<input name='class_stunum' type="text" class="numberinput" value="{{obj.class_stunum}}" placeholder="인원을 입력하세요..." id='id_class_stunum'>
             </div>
 		<br>
             <div class="time">
 			<label for='id_class_time'>시간</label>
-		  	<input name='class_time' type="text" class="timeinput" placeholder="시간을 입력하세요..." id='id_class_time'>
+		  	<input name='class_time' type="text" class="timeinput" value="{{obj.class_time}}" placeholder="시간을 입력하세요..." id='id_class_time'>
             </div>
 		<br>
             <div class="place">
 			<label for='id_class_place'>장소</label>
-		  	<input name='class_place' type="text" class="placeinput" placeholder="장소를 입력하세요..." id='id_class_place'>
+		  	<input name='class_place' type="text" class="placeinput" value="{{obj.class_place}}" placeholder="장소를 입력하세요..." id='id_class_place'>
             </div>
         <br>
         <div class="place">
 			<label for='id_memo'>메모</label>
-		  	<textarea name='memo' row="10" cols="47" type="text" class="placeinput" placeholder="메모를 입력하세요..." id='id_memo'></textarea>
+		  	<textarea name='memo' row="10" cols="47" type="text" class="placeinput" placeholder="메모를 입력하세요..." id='id_memo'>{{obj.memo}}</textarea>
             </div>
         <br>
         <div class=submit>

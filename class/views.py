@@ -14,6 +14,9 @@ from teacher.models import *
 @login_required
 def class_home(request):
 	qs = Classinfo.objects.all()
+	
+
+
 	context = {'title':'class information','object_list': qs}
 	return render(request, 'class/class_table.html', context)
 
@@ -81,6 +84,28 @@ def class_detail_view(request, class_id):
 			print(request.POST.get(request.POST.get('dyna_mat_num%d'%(i+1))))
 			#print(mat_obj[i].mat_deliver_done)
 
+		if obj.class_cont_call or obj.class_cont_message or obj.class_cont_email:
+			obj.class_process="수업문의"
+			if obj.class_doc_plan or obj.class_doc_preestim or obj.class_doc_tea:
+				obj.class_process="서류제출"
+				if True:
+					obj.class_process="재료주문"
+					if True:
+						obj.class_process="도착확인"
+						if obj.class_done:
+							obj.class_process="수업준비"
+							if obj.class_ready:
+								obj.class_process="재료준비"
+								if obj.class_taken:
+									obj.class_process="강사수거"
+									if obj.class_re_done:
+										obj.class_process="도구반납"
+										if obj.class_doc_finestim or (obj.class_cal_meth != None):
+											if obj.class_deposit_check:
+												obj.class_process="완료"
+										
+
+		obj.save()
 		form_class.save()
 			
 			
@@ -97,10 +122,32 @@ def class_update_view(request, class_id):
 	# 1 object -> detail view
 	obj = get_object_or_404(Classinfo, class_id=class_id)
 	form = ClassModelForm(request.POST or None, instance=obj)
+	sch_obj=Schoolinfo.objects.all()
+	classstat_obj=Classstatinfo.objects.all()
+	tea_obj=Teacherinfo.objects.all()
+	stat_mat_filtered = stat_mat_rel.objects.all().filter(stat_mat=obj.class_statkey)
+	stat_tool_filtered = stat_tool_rel.objects.all().filter(stat_tool=obj.class_statkey)
 	if form.is_valid():
+		if request.POST.get('class_stat') != obj.class_stat:
+			list(dyna_mat_obj.filter(dyna_mat=obj)).delete()
+			list(dyna_tool_obj.filter(dyna_tool=obj)).delete()
+			for i in range(len(stat_mat_filtered)):
+				dyna_mat_obj = dyna_mat_rel()
+				dyna_mat_obj.dyna_mat = obj
+				dyna_mat_obj.dyna_mat_num = stat_mat_filtered[i].stat_mat_num
+				dyna_mat_obj.mat_dyna = stat_mat_filtered[i].mat_stat
+				print(dyna_mat_obj.mat_dyna.mat_name)
+				dyna_mat_obj.save()
+			for j in range(len(stat_tool_filtered)):
+				dyna_tool_obj = dyna_tool_rel()
+				dyna_tool_obj.dyna_tool = obj
+				dyna_tool_obj.dyna_tool_num = stat_tool_filtered[j].stat_tool_num
+				dyna_tool_obj.tool_dyna = stat_tool_filtered[j].tool_stat
+				dyna_tool_obj.save()
+				print(dyna_tool_obj.tool_dyna.tool_name)
 		form.save()
 	template_name = 'class/class_update.html'
-	context = {'form': form}
+	context = {'form': form, 'obj':obj, 'sch_obj':sch_obj, 'classstat_obj':classstat_obj, 'tea_obj':tea_obj}
 	return render(request, template_name, context)
 
 @login_required
